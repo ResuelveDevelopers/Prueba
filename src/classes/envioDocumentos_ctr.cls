@@ -32,7 +32,9 @@ public class envioDocumentos_ctr
 	String strURLAutentic							= '';
 	Boolean blnValidar								= false;
 	Boolean blnvalidarEstadoContrato				= false;
-		
+	
+
+	//Este metodo se encarga de validar............
 	public envioDocumentos_ctr(ApexPages.StandardController stdController)
 	{
 		
