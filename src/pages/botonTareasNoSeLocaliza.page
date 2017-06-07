@@ -1,0 +1,17 @@
+<apex:page showHeader="true" sidebar="true" standardController="Task" extensions="botonTareasNoSeLocaliza_ctr" action="{!flujoNoSeLocaliza}" tabStyle="Task">
+	<apex:form >
+		<apex:pageBlock title="Errores No Se Localiza">
+			<apex:pageBlockButtons location="bottom">
+               <apex:commandButton action="{!Cancel}" value="Regresar"/>
+            </apex:pageBlockButtons>
+			<apex:pageMessages />
+		</apex:pageBlock>
+		<apex:inputHidden value="{!Task.NumerodeintentosdeLocalizacion__c}"/>
+		<apex:inputHidden value="{!Task.FechadeUltimoIntentodeLocalizacion__c}"/>
+		<apex:inputHidden value="{!Task.HistorialIntentosLocalizacion__c}"/>
+		<apex:inputHidden value="{!Task.RecordType.Name}"/>
+		<apex:inputHidden value="{!Task.Subject}"/>
+		<apex:inputHidden value="{!Task.WhatId}"/>
+		<apex:inputHidden value="{!Task.Status}"/>
+	</apex:form>
+</apex:page>

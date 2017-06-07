@@ -1,0 +1,90 @@
+<apex:page showHeader="true" sidebar="true" controller="ProgramarClases_ctr">
+	
+	<style type="text/css">
+	/*	th, td 
+		{
+		    padding: 10px;   
+		}*/
+
+	</style>
+
+	
+	<!-- <apex:pageBlock title="Programar Apex días hábiles" /> -->
+		<apex:sectionHeader title="Programar Apex" description="" />
+		
+	
+		<apex:form id="formulario">
+			<apex:pageMessages />
+			<apex:actionFunction name="seleccionar"   reRender="formulario" status="loading"/>
+			
+        	
+        	
+        	<apex:pageBlock >
+	        	<apex:pageBlockButtons location="bottom">
+					<apex:commandButton value="Programar ejecución" action="{!ProgramarClase}"  status="loading" reRender="formulario"/> 
+					<apex:actionStatus id="loading">
+		            	<apex:facet name="start">
+		                	<div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+	                   		 height: 100%;opacity:0.65;width:100%;"> 
+			                    <div class="waitingHolder" style="top: 50%; width: 91px;">
+			                        <img class="waitingImage" src="/img/loading32.gif" title="Please Wait..." />
+			                        <span class="waitingDescription">Cargando...</span>
+			                    </div>
+	                		</div>            
+		            	</apex:facet>
+        			</apex:actionStatus>
+	        	</apex:pageBlockButtons>
+        		<table style="width:80%;margin: 0 auto;">
+        			<tr>
+	        			<td colspan="4" style="text-align: center;padding: 10px;"> 
+	        				<b><apex:outputLabel value="Programar todo el año actual"/></b>
+							<apex:inputCheckbox value="{!anioCompleto}" onchange="seleccionar()"/>
+						</td>
+					</tr>
+					
+					<tr>
+	        			<td style="padding: 10px;">
+	        				<b><apex:outputLabel value="DÍA ESPECÍFICO " rendered="{!not(anioCompleto)}" style="margin-right:80px;padding:5px;"/></b>
+	        				<apex:outputLabel value="Mes: " rendered="{!not(anioCompleto)}"/>
+					        <apex:selectList value="{!meses}" size="1" rendered="{!not(anioCompleto)}" >
+					            <apex:selectOptions Value="{!lstMeses}" />
+					        </apex:selectList>
+				    	</td>
+
+				    	<td style="padding: 10px;"> 
+					    	<apex:outputLabel value="El día hábil: " rendered="{!anioCompleto}"/>
+					        <apex:outputLabel value="El día: " rendered="{!not(anioCompleto)}"/>
+					        <apex:selectList value="{!dia}" size="1" rendered="{!anioCompleto}">
+					            <apex:selectOptions value="{!lstDias}"/>
+					        </apex:selectList>
+					        <apex:selectList value="{!dia}" size="1" rendered="{!not(anioCompleto)}">
+					            <apex:selectOptions value="{!lstDiasEsp}"/>
+					        </apex:selectList>
+				    	</td>
+
+				    	<td style="padding: 10px;">
+				    		<apex:outputLabel value="Hora: "/>
+					        <apex:selectList value="{!horas}" size="1" >
+					            <apex:selectOptions value="{!lstHoras}"/>
+					        </apex:selectList>
+				    	</td>
+
+				    	<td style="padding: 10px;">
+				    		<apex:outputLabel value="Minutos: "/>
+					        <apex:selectList value="{!minutos}" size="1" >
+					            <apex:selectOptions value="{!lstMinutos}"/>
+					        </apex:selectList>
+				    	</td>
+				    </tr>
+				    <tr>
+	        			<td colspan="4" style="text-align: center;padding: 10px;"> 
+					        <apex:outputLabel value="Clase a programar: "/>
+					        <apex:selectList value="{!clase}" size="1" >
+					            <apex:selectOptions value="{!lstClasesProgramadas}"/>
+					        </apex:selectList>
+			        	</td>
+					</tr>
+			    </table>
+		    </apex:pageBlock>
+	    </apex:form>
+</apex:page>

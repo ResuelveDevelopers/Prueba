@@ -1,0 +1,59 @@
+<apex:page standardController="SolicitudesDeFondos__c"  extensions="CargaDocumentosCartaDeInstruccion_ctr">
+   <apex:form >
+       <apex:pagemessages id="ErrorMsg" />
+       <apex:outputPanel rendered="{!blnrefreshPage}">  
+            <script>
+                  window.top.location='/{!idSolFondo}';
+            </script>
+       </apex:outputPanel>  
+       <table class="detailList" width="100%" border="0">
+           <tr>
+               <td style="text-align: right;width:16%">
+                    <apex:outputLabel style="font-weight:bold;font-size: 0.9em;color:#4a4a56;" value="Carta de Instrucción 1"/> 
+                </td>
+                <td style="text-align: right;width:1%">
+                </td>
+                <td width="30%" >
+                     <apex:outputLink target="_blank"  value="{!objSolicitudesDeFondos.CartaInstruccion1__c}" >{!objSolicitudesDeFondos.CartaInstruccion1__c}</apex:outputLink>                        
+                </td>
+                <td width="53%" style="Text-align:right">                         
+                      <apex:outputLabel style="color:red;text-align: center;" value="{!strError}"/> 
+                      <apex:inputFile value="{!blopCartInst}" rendered="{!objSolicitudesDeFondos.CartaInstruccion1__c=null && blnUploadEligible}" id="fileupload1" fileName="{!strFileNameCartinst}"/> 
+                      <apex:commandButton value="subir" rendered="{!objSolicitudesDeFondos.CartaInstruccion1__c=null && blnUploadEligible}" status="Uploading" action="{!Upload_Solicitud1}"/>                            
+                 </td>
+           </tr>
+           <tr></tr><tr></tr>
+           <tr>
+           <td style="text-align: right;width:16%">
+                    <apex:outputLabel style="font-weight:bold;font-size: 0.9em;color:#4a4a56;" value="Carta de Instrucción 2"/> 
+                </td>
+                <td style="text-align: right;width:1%">
+                </td>
+                <td width="30%" >
+                     <apex:outputLink target="_blank"  value="{!objSolicitudesDeFondos.CartaInstruccion2__c}" >{!objSolicitudesDeFondos.CartaInstruccion2__c}</apex:outputLink>                        
+                </td>
+                <td width="53%" style="Text-align:right">                         
+                      <apex:outputLabel style="color:red;text-align: center;" value="{!strError}"/> 
+                      <apex:inputFile value="{!blopCartInst}" rendered="{!objSolicitudesDeFondos.CartaInstruccion2__c=null && blnUploadEligible}" id="fileupload2" fileName="{!strFileNameCartinst}"/> 
+                      <apex:commandButton value="subir" rendered="{!objSolicitudesDeFondos.CartaInstruccion2__c=null && blnUploadEligible}" status="Uploading" action="{!Upload_Solicitud2}"/>                            
+                 </td>
+           </tr>
+           <tr></tr><tr></tr>
+           <tr>
+           <td style="text-align: right;width:16%">
+                    <apex:outputLabel style="font-weight:bold;font-size: 0.9em;color:#4a4a56;" value="Carta de Instrucción 3"/> 
+                </td>
+                <td style="text-align: right;width:1%">
+                </td>
+                <td width="30%" >
+                     <apex:outputLink target="_blank"  value="{!objSolicitudesDeFondos.CartaInstruccion3__c}" >{!objSolicitudesDeFondos.CartaInstruccion3__c}</apex:outputLink>                        
+                </td>
+                <td width="53%" style="Text-align:right">                         
+                      <apex:outputLabel style="color:red;text-align: center;" value="{!strError}"/> 
+                      <apex:inputFile value="{!blopCartInst}" rendered="{!objSolicitudesDeFondos.CartaInstruccion3__c=null && blnUploadEligible}" id="fileupload3" fileName="{!strFileNameCartinst}"/> 
+                      <apex:commandButton value="subir" rendered="{!objSolicitudesDeFondos.CartaInstruccion3__c=null && blnUploadEligible}" status="Uploading" action="{!Upload_Solicitud3}"/>                            
+                </td>
+           </tr>
+       </table>
+   </apex:form>
+</apex:page>

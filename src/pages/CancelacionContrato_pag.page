@@ -1,0 +1,4 @@
+<apex:page standardController="Lead" extensions="CancelacionContrato_ctr" action="{!actualizarContrato}" >
+	<!--   <apex:pageMessage summary="{!strMessage}" severity="{!strMessageSeverity}" rendered="{!blnShowMessage}" strength="1"/> -->
+	<apex:pageMessages id="messages" />	
+</apex:page>

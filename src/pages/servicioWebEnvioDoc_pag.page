@@ -1,0 +1,7 @@
+<apex:page showHeader="true" sidebar="true" controller="servicioWebEnvioDoc">
+	<apex:form > 
+          <B><apex:inputText value="{!nombreAdjunto}">Nombre adjunto:&nbsp;</apex:inputText></B><br/><br/>
+          <apex:commandButton value="Crear adjunto" action="{!restTest}"  status="waitStatus"/>
+          <apex:actionStatus startText="Fetching Records..." stopText="" id="waitStatus"/><br/><br/>
+    </apex:form>
+</apex:page>

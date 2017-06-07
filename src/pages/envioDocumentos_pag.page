@@ -1,0 +1,13 @@
+<apex:page standardController="Lead" extensions="envioDocumentos_ctr" action="{!actualizarContrato}">
+	 <!-- <script type = "text/javascript">
+		function getBack()
+		{
+			window.history.back();
+		}
+	</script> -->
+	<apex:pageMessages id="messages" />
+	<apex:form id="idForm">
+		<!--  <apex:commandButton onclick="getBack()" value="Volver al Candidato" id="theButton" style="display: block;margin-left: auto;margin-right: auto;margin-top:1%;" reRender="idForm,actStatusId" status="actStatusId" /> -->
+		<apex:commandButton action="{!cancel}" value="Volver al Candidato" id="theButton" style="display: block;margin-left: auto;margin-right: auto;margin-top:1%;" reRender="idForm,actStatusId" status="actStatusId" />
+	</apex:form> 	 
+</apex:page>

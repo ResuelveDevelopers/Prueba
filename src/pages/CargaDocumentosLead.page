@@ -1,0 +1,183 @@
+<apex:page standardController="Lead" extensions="CargaDocumentosLead_ctr" standardStylesheets="true" showHeader="false" sidebar="false">
+    <apex:form >
+        <apex:outputPanel rendered="{!blnrefreshPage}">
+            <script>
+              window.top.location='/{!idLead}';
+            </script>   
+        </apex:outputPanel>
+       <apex:pageBlock mode="maindetail">
+       <apex:pageMessages > </apex:pageMessages>
+            <table class="detailList" width="100%" border="0">
+                  
+               <!-- Cedula -->
+               <tr>
+                  <td style="text-align: right;width:16%">
+                      <apex:outputLabel style="font-weight:bold;font-size: 0.9em;color:#4a4a56;" value="Cédula" />
+                   </td>
+                 <td style="text-align: center;width:38%">
+                     <apex:outputLabel style="color:red;text-align: center;" value="{!strErrorCedula}"/>
+                     <apex:inputFile value="{!blFileCedula}" rendered="{!objSelectedLead.CedulaURL__c=null && blnUploadEligible}"   
+                                     id="fileuploadCedula" fileName="{!strFileNameCedula}"/> 
+                     <apex:commandButton value="Subir"  rendered="{!objSelectedLead.CedulaURL__c=null && blnUploadEligible}"  action="{!UploadFileCedula}"/>    
+                 </td>                 
+                 <td style="width:46%">
+                    <a target="_blank"  href="/servlet/servlet.FileDownload?file={!Right(objSelectedLead.CedulaURL__c,18)}">
+                        <apex:outputLabel rendered="{!objSelectedLead.CedulaURL__c!=null}" >
+                            {!Left(objSelectedLead.CedulaURL__c,LEN(objSelectedLead.CedulaURL__c)-53)}...
+                        </apex:outputLabel>
+                    </a> 
+                 </td>
+               </tr>  
+               <!-- Fin Cedula -->
+               
+               <!-- Recibo Publico -->
+               <tr>
+                  <td style="text-align: right;width:16%">
+                      <apex:outputLabel style="font-weight:bold;font-size: 0.9em;color:#4a4a56;" value="Recibo Público" />
+                   </td>
+                 <td style="text-align: center;width:38%">
+                     <apex:outputLabel style="color:red;text-align: center;" value="{!strErrorReciboPublico}"/>
+                     <apex:inputFile value="{!blFileReciboPublico}" rendered="{!objSelectedLead.ReciboPublicoURL__c=null && blnUploadEligible}"   
+                                     id="fileuploadReciboPublico" fileName="{!strFileNameReciboPublico}"/> 
+                     <apex:commandButton value="Subir"  rendered="{!objSelectedLead.ReciboPublicoURL__c=null && blnUploadEligible}"  action="{!UploadFileReciboPublico}"/>    
+                 </td>                 
+                 <td style="width:46%">
+                    <a target="_blank"  href="/servlet/servlet.FileDownload?file={!Right(objSelectedLead.ReciboPublicoURL__c,18)}">
+                        <apex:outputLabel rendered="{!objSelectedLead.ReciboPublicoURL__c!=null}" >
+                            {!Left(objSelectedLead.ReciboPublicoURL__c,LEN(objSelectedLead.ReciboPublicoURL__c)-53)}...
+                        </apex:outputLabel>
+                    </a> 
+                 </td>
+                </tr>   
+				<!-- Fin Recibo Publico -->
+
+                <!-- Comprobante Atraso 1 -->
+               <tr>
+                  <td style="text-align: right;width:16%">
+                      <apex:outputLabel style="font-weight:bold;font-size: 0.9em;color:#4a4a56;" value="Comprobante Atraso 1" />
+                   </td>
+                 <td style="text-align: center;width:38%">
+                     <apex:outputLabel style="color:red;text-align: center;" value="{!strErrorComprobanteAtraso1}"/>
+                     <apex:inputFile value="{!blFileComprobanteAtraso1}" rendered="{!objSelectedLead.ComprobanteAtraso1URL__c=null && blnUploadEligible}"   
+                                     id="fileuploadComprobanteAtraso1" fileName="{!strFileNameComprobanteAtraso1}"/> 
+                     <apex:commandButton value="Subir"  rendered="{!objSelectedLead.ComprobanteAtraso1URL__c=null && blnUploadEligible}"  action="{!UploadFileComprobanteAtraso1}"/>    
+                 </td>                 
+                 <td style="width:46%">
+                    <a target="_blank"  href="/servlet/servlet.FileDownload?file={!Right(objSelectedLead.ComprobanteAtraso1URL__c,18)}">
+                        <apex:outputLabel rendered="{!objSelectedLead.ComprobanteAtraso1URL__c!=null}" >
+                            {!Left(objSelectedLead.ComprobanteAtraso1URL__c,LEN(objSelectedLead.ComprobanteAtraso1URL__c)-53)}...
+                        </apex:outputLabel>
+                    </a> 
+                 </td>
+                </tr>   
+				<!-- Fin Comprobante Atraso 1 -->
+
+                <!-- Comprobante Atraso 2 -->
+               <tr>
+                  <td style="text-align: right;width:16%">
+                      <apex:outputLabel style="font-weight:bold;font-size: 0.9em;color:#4a4a56;" value="Comprobante Atraso 2" />
+                   </td>
+                 <td style="text-align: center;width:38%">
+                     <apex:outputLabel style="color:red;text-align: center;" value="{!strErrorComprobanteAtraso2}"/>
+                     <apex:inputFile value="{!blFileComprobanteAtraso2}" rendered="{!objSelectedLead.ComprobanteAtraso2URL__c=null && blnUploadEligible}"   
+                                     id="fileuploadComprobanteAtraso2" fileName="{!strFileNameComprobanteAtraso2}"/> 
+                     <apex:commandButton value="Subir"  rendered="{!objSelectedLead.ComprobanteAtraso2URL__c=null && blnUploadEligible}"  action="{!UploadFileComprobanteAtraso2}"/>    
+                 </td>                 
+                 <td style="width:46%">
+                    <a target="_blank"  href="/servlet/servlet.FileDownload?file={!Right(objSelectedLead.ComprobanteAtraso2URL__c,18)}">
+                        <apex:outputLabel rendered="{!objSelectedLead.ComprobanteAtraso2URL__c!=null}" >
+                            {!Left(objSelectedLead.ComprobanteAtraso2URL__c,LEN(objSelectedLead.ComprobanteAtraso2URL__c)-53)}...
+                        </apex:outputLabel>
+                    </a> 
+                 </td>
+                </tr>   
+				<!-- Fin Comprobante Atraso 2 -->
+
+                <!-- Comprobante Atraso 3 -->
+               <tr>
+                  <td style="text-align: right;width:16%">
+                      <apex:outputLabel style="font-weight:bold;font-size: 0.9em;color:#4a4a56;" value="Comprobante Atraso 3" />
+                   </td>
+                 <td style="text-align: center;width:38%">
+                     <apex:outputLabel style="color:red;text-align: center;" value="{!strErrorComprobanteAtraso3}"/>
+                     <apex:inputFile value="{!blFileComprobanteAtraso3}" rendered="{!objSelectedLead.ComprobanteAtraso3URL__c=null && blnUploadEligible}"   
+                                     id="fileuploadComprobanteAtraso3" fileName="{!strFileNameComprobanteAtraso3}"/> 
+                     <apex:commandButton value="Subir"  rendered="{!objSelectedLead.ComprobanteAtraso3URL__c=null && blnUploadEligible}"  action="{!UploadFileComprobanteAtraso3}"/>    
+                 </td>                 
+                 <td style="width:46%">
+                    <a target="_blank"  href="/servlet/servlet.FileDownload?file={!Right(objSelectedLead.ComprobanteAtraso3URL__c,18)}">
+                        <apex:outputLabel rendered="{!objSelectedLead.ComprobanteAtraso3URL__c!=null}" >
+                            {!Left(objSelectedLead.ComprobanteAtraso3URL__c,LEN(objSelectedLead.ComprobanteAtraso3URL__c)-53)}...
+                        </apex:outputLabel>
+                    </a> 
+                 </td>
+                </tr>   
+				<!-- Fin Comprobante Atraso 3 -->
+
+                <!-- Comprobante Atraso 4 -->
+               <tr>
+                  <td style="text-align: right;width:16%">
+                      <apex:outputLabel style="font-weight:bold;font-size: 0.9em;color:#4a4a56;" value="Comprobante Atraso 4" />
+                   </td>
+                 <td style="text-align: center;width:38%">
+                     <apex:outputLabel style="color:red;text-align: center;" value="{!strErrorComprobanteAtraso4}"/>
+                     <apex:inputFile value="{!blFileComprobanteAtraso4}" rendered="{!objSelectedLead.ComprobanteAtraso4URL__c=null && blnUploadEligible}"   
+                                     id="fileuploadComprobanteAtraso4" fileName="{!strFileNameComprobanteAtraso4}"/> 
+                     <apex:commandButton value="Subir"  rendered="{!objSelectedLead.ComprobanteAtraso4URL__c=null && blnUploadEligible}"  action="{!UploadFileComprobanteAtraso4}"/>    
+                 </td>                 
+                 <td style="width:46%">
+                    <a target="_blank"  href="/servlet/servlet.FileDownload?file={!Right(objSelectedLead.ComprobanteAtraso4URL__c,18)}">
+                        <apex:outputLabel rendered="{!objSelectedLead.ComprobanteAtraso4URL__c!=null}" >
+                            {!Left(objSelectedLead.ComprobanteAtraso4URL__c,LEN(objSelectedLead.ComprobanteAtraso4URL__c)-53)}...
+                        </apex:outputLabel>
+                    </a> 
+                 </td>
+                </tr>   
+				<!-- Fin Comprobante Atraso 4 -->
+
+                <!-- Comprobante Atraso 5 -->
+               <tr>
+                  <td style="text-align: right;width:16%">
+                      <apex:outputLabel style="font-weight:bold;font-size: 0.9em;color:#4a4a56;" value="Comprobante Atraso 5" />
+                   </td>
+                 <td style="text-align: center;width:38%">
+                     <apex:outputLabel style="color:red;text-align: center;" value="{!strErrorComprobanteAtraso5}"/>
+                     <apex:inputFile value="{!blFileComprobanteAtraso5}" rendered="{!objSelectedLead.ComprobanteAtraso5URL__c=null && blnUploadEligible}"   
+                                     id="fileuploadComprobanteAtraso5" fileName="{!strFileNameComprobanteAtraso5}"/> 
+                     <apex:commandButton value="Subir"  rendered="{!objSelectedLead.ComprobanteAtraso5URL__c=null && blnUploadEligible}"  action="{!UploadFileComprobanteAtraso5}"/>    
+                 </td>                 
+                 <td style="width:46%">
+                    <a target="_blank"  href="/servlet/servlet.FileDownload?file={!Right(objSelectedLead.ComprobanteAtraso5URL__c,18)}">
+                        <apex:outputLabel rendered="{!objSelectedLead.ComprobanteAtraso5URL__c!=null}" >
+                            {!Left(objSelectedLead.ComprobanteAtraso5URL__c,LEN(objSelectedLead.ComprobanteAtraso5URL__c)-53)}...
+                        </apex:outputLabel>
+                    </a> 
+                 </td>
+                </tr>   
+				<!-- Fin Comprobante Atraso 5 -->
+
+                <!-- Comprobante Atraso 6 -->
+               <tr>
+                  <td style="text-align: right;width:16%">
+                      <apex:outputLabel style="font-weight:bold;font-size: 0.9em;color:#4a4a56;" value="Comprobante Atraso 6" />
+                   </td>
+                 <td style="text-align: center;width:38%">
+                     <apex:outputLabel style="color:red;text-align: center;" value="{!strErrorComprobanteAtraso6}"/>
+                     <apex:inputFile value="{!blFileComprobanteAtraso6}" rendered="{!objSelectedLead.ComprobanteAtraso6URL__c=null && blnUploadEligible}"   
+                                     id="fileuploadComprobanteAtraso6" fileName="{!strFileNameComprobanteAtraso6}"/> 
+                     <apex:commandButton value="Subir"  rendered="{!objSelectedLead.ComprobanteAtraso6URL__c=null && blnUploadEligible}"  action="{!UploadFileComprobanteAtraso6}"/>    
+                 </td>                 
+                 <td style="width:46%">
+                    <a target="_blank"  href="/servlet/servlet.FileDownload?file={!Right(objSelectedLead.ComprobanteAtraso6URL__c,18)}">
+                        <apex:outputLabel rendered="{!objSelectedLead.ComprobanteAtraso6URL__c!=null}" >
+                            {!Left(objSelectedLead.ComprobanteAtraso6URL__c,LEN(objSelectedLead.ComprobanteAtraso6URL__c)-53)}...
+                        </apex:outputLabel>
+                    </a> 
+                 </td>
+                </tr>   
+				<!-- Fin Comprobante Atraso 6 -->
+
+            </table>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

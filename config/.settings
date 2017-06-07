@@ -1,0 +1,17 @@
+{
+    "projectName": "DEV_RTD_COLOMBIA",
+    "username": "cristina@resuelvecolombia.desarrollo.com",
+    "id": "b16d4380-4b34-11e7-81d0-67f8fdbeb118",
+    "namespace": "",
+    "orgType": "developer",
+    "loginUrl": "https://login.salesforce.com/",
+    "instanceUrl": "https://cs41.salesforce.com",
+    "workspace": "C:\\SFDC Projects",
+    "subscription": [
+        "ApexClass",
+        "ApexComponent",
+        "ApexPage",
+        "ApexTrigger",
+        "StaticResource"
+    ]
+}

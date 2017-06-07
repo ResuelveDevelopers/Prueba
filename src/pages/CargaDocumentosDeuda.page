@@ -1,0 +1,359 @@
+<apex:page standardController="Deudas__c"  standardStylesheets="true"  extensions="CargaDocumentosDeuda_ctr" sidebar="false">
+    <apex:form >
+    <apex:sectionHeader title="" subtitle="Adjuntar Documentos" />
+        <apex:pageMessages /> 
+        <apex:outputPanel rendered="{!blnrefreshPage}">  
+            <script>
+                  window.top.location='/{!idDeuda}';
+            </script>
+       </apex:outputPanel>
+       <apex:pageBlock id="idPB01">
+           <apex:pageBlockButtons >
+               <apex:commandButton value="Cerrar" id="btCancel" action="{!cancel}" />
+           </apex:pageBlockButtons>
+       
+           <apex:pageBlockSection id="idPBS01" title="Comprobante de Liquidación" columns="2" rendered="true">     
+           <!-- Comprobante de liquidación 1-->          
+               <apex:pageBlockSectionItem id="idPBSI01">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.ComprobanteLiquidacion1__c.label}" />
+                   <apex:outputPanel id="ComprobanteLiquidacion">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.ComprobanteLiquidacion1__c==null}"  fileName="{!strFileName}" value="{!BlobCompLiqui}"/>
+                       <apex:commandButton value="Subir" action="{!CargaComprobanteLiquidacion1}" rendered="{!objDeuda.ComprobanteLiquidacion1__c==null}"/>
+                       <!-- <apex:commandLink action="{!getArchivo2}" value="{!objDeuda.ComprobanteLiquidacion1__c}">
+                        <apex:param name="nombreArchivo" value="{!objDeuda.ComprobanteLiquidacion1__c}" assignTo="{!nombreArchivoDescargar}"/>
+                       </apex:commandLink>
+                       <br/> -->
+                       
+                       <apex:outputLabel value="{!objDeuda.ComprobanteLiquidacion1__c}" rendered="{!objDeuda.ComprobanteLiquidacion1__c!=null}" />
+                   </apex:outputPanel> 
+              </apex:pageBlockSectionItem>
+                  
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarComprobanteLiquidacion1}" rendered="{!objDeuda.ComprobanteLiquidacion1__c!=null}"/>  
+               </apex:pageBlockSectionItem>
+                  
+
+               <!-- Comprobante de liquidación 2-->
+               <apex:pageBlockSectionItem id="idPBSI002" rendered="{!objDeuda.ComprobanteLiquidacion1__c!=null}">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.ComprobanteLiquidacion2__c.label}" />
+                   <apex:outputPanel id="ComprobanteLiquidacion2">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.ComprobanteLiquidacion2__c==null}"  fileName="{!strFileName}" value="{!BlobCompLiqui}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaComprobanteLiquidacion2}" rendered="{!objDeuda.ComprobanteLiquidacion2__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.ComprobanteLiquidacion2__c}" rendered="{!objDeuda.ComprobanteLiquidacion2__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+              <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarComprobanteLiquidacion2}" rendered="{!objDeuda.ComprobanteLiquidacion2__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+
+               <!-- Comprobante de liquidación 3-->          
+               <apex:pageBlockSectionItem id="idPBSI003" rendered="{!objDeuda.ComprobanteLiquidacion2__c!=null}">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.ComprobanteLiquidacion3__c.label}" />
+                   <apex:outputPanel id="ComprobanteLiquidacion3">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.ComprobanteLiquidacion3__c==null}"  fileName="{!strFileName}" value="{!BlobCompLiqui}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaComprobanteLiquidacion3}" rendered="{!objDeuda.ComprobanteLiquidacion3__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.ComprobanteLiquidacion3__c}" rendered="{!objDeuda.ComprobanteLiquidacion3__c!=null}"/>
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+              <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarComprobanteLiquidacion3}" rendered="{!objDeuda.ComprobanteLiquidacion3__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+               <!-- Comprobante de liquidación 4-->
+               <apex:pageBlockSectionItem id="idPBSI004" rendered="{!objDeuda.ComprobanteLiquidacion3__c!=null}">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.ComprobanteLiquidacion4__c.label}" />
+                   <apex:outputPanel id="ComprobanteLiquidacion4">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.ComprobanteLiquidacion4__c==null}"  fileName="{!strFileName}" value="{!BlobCompLiqui}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaComprobanteLiquidacion4}" rendered="{!objDeuda.ComprobanteLiquidacion4__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.ComprobanteLiquidacion4__c}" rendered="{!objDeuda.ComprobanteLiquidacion4__c!=null}"/>
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               
+              <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarComprobanteLiquidacion4}" rendered="{!objDeuda.ComprobanteLiquidacion4__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+               
+               <!-- Comprobante de liquidación 5-->          
+               <apex:pageBlockSectionItem id="idPBSI005" rendered="{!objDeuda.ComprobanteLiquidacion4__c!=null}">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.ComprobanteLiquidacion5__c.label}" />
+                   <apex:outputPanel id="ComprobanteLiquidacion5">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.ComprobanteLiquidacion5__c==null}"  fileName="{!strFileName}" value="{!BlobCompLiqui}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaComprobanteLiquidacion5}" rendered="{!objDeuda.ComprobanteLiquidacion5__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.ComprobanteLiquidacion5__c}" rendered="{!objDeuda.ComprobanteLiquidacion5__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarComprobanteLiquidacion5}" rendered="{!objDeuda.ComprobanteLiquidacion5__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+               <!-- Comprobante de liquidación 6-->
+               <apex:pageBlockSectionItem id="idPBSI006" rendered="{!objDeuda.ComprobanteLiquidacion5__c!=null}">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.ComprobanteLiquidacion6__c.label}" />
+                   <apex:outputPanel id="ComprobanteLiquidacion6">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.ComprobanteLiquidacion6__c==null}"  fileName="{!strFileName}" value="{!BlobCompLiqui}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaComprobanteLiquidacion6}" rendered="{!objDeuda.ComprobanteLiquidacion6__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.ComprobanteLiquidacion6__c}" rendered="{!objDeuda.ComprobanteLiquidacion6__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarComprobanteLiquidacion6}" rendered="{!objDeuda.ComprobanteLiquidacion6__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+
+               <!-- Comprobante de liquidación 7-->          
+               <apex:pageBlockSectionItem id="idPBSI007" rendered="{!objDeuda.ComprobanteLiquidacion6__c!=null}">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.ComprobanteLiquidacion7__c.label}" />
+                   <apex:outputPanel id="ComprobanteLiquidacion7">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.ComprobanteLiquidacion7__c==null}"  fileName="{!strFileName}" value="{!BlobCompLiqui}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaComprobanteLiquidacion7}" rendered="{!objDeuda.ComprobanteLiquidacion7__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.ComprobanteLiquidacion7__c}" rendered="{!objDeuda.ComprobanteLiquidacion7__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarComprobanteLiquidacion7}" rendered="{!objDeuda.ComprobanteLiquidacion7__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+              
+               <!-- Comprobante de liquidación 8-->
+               <apex:pageBlockSectionItem id="idPBSI008" rendered="{!objDeuda.ComprobanteLiquidacion7__c!=null}">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.ComprobanteLiquidacion8__c.label}" />
+                   <apex:outputPanel id="ComprobanteLiquidacion8">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.ComprobanteLiquidacion8__c==null}"  fileName="{!strFileName}" value="{!BlobCompLiqui}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaComprobanteLiquidacion8}" rendered="{!objDeuda.ComprobanteLiquidacion8__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.ComprobanteLiquidacion8__c}" rendered="{!objDeuda.ComprobanteLiquidacion8__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarComprobanteLiquidacion8}" rendered="{!objDeuda.ComprobanteLiquidacion8__c!=null}"/>  
+               </apex:pageBlockSectionItem>
+           </apex:pageBlockSection>
+
+           
+           <!-- Carta Poder-->
+           <apex:pageBlockSection id="idPBS02" title="Carta de Poder" columns="2" rendered="true">
+               
+               <apex:pageBlockSectionItem id="idPBSI02">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.CartaPoder__c.label}" />
+                   <apex:outputPanel id="CartaPoder">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.CartaPoder__c==null}"  fileName="{!strFileName}" value="{!BlobCartaPoder}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaCartaPoder}" rendered="{!objDeuda.CartaPoder__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.CartaPoder__c}" rendered="{!objDeuda.CartaPoder__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaPoder}" rendered="{!objDeuda.CartaPoder__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+           </apex:pageBlockSection>
+           
+           <!-- Paz y Salvo-->
+           <apex:pageBlockSection id="idPBS03" title="Paz y Salvo" columns="2" rendered="true">               
+               <apex:pageBlockSectionItem id="idPBSI03">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.PazySalvo__c.label}" />
+                   <apex:outputPanel id="PazSalvo">
+                       <apex:inputFile fileSize="{!fileSize}" rendered="{!objDeuda.PazySalvo__c==null}"  fileName="{!strFileName}" value="{!BlobPazSalvo}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaPazSalvo}" rendered="{!objDeuda.PazySalvo__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.PazySalvo__c}" rendered="{!objDeuda.PazySalvo__c!=null}" />
+
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarPazSalvo}" rendered="{!objDeuda.PazySalvo__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+           </apex:pageBlockSection>
+           
+           <apex:pageBlockSection id="idPBS04" title="Convenio de liquidación" columns="2" rendered="true">               
+              <!-- Convenio de liquidación 1-->
+               <apex:pageBlockSectionItem id="idPBSI04">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.ConvenioLiquidacion1__c.label}" />
+                   <apex:outputPanel id="convLiqui1">
+                       <apex:inputFile fileSize="{!fileSize}" rendered="{!objDeuda.ConvenioLiquidacion1__c==null}"  fileName="{!strFileName}" value="{!BlobConvLiqui}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaConvenioLiquidacion1}" rendered="{!objDeuda.ConvenioLiquidacion1__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.ConvenioLiquidacion1__c}" rendered="{!objDeuda.ConvenioLiquidacion1__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarConvenioLiquidacion1}" rendered="{!objDeuda.ConvenioLiquidacion1__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+              
+               <!-- Convenio de liquidación 2-->
+               <apex:pageBlockSectionItem id="idPBSI05" rendered="{!objDeuda.ConvenioLiquidacion1__c!=null}">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.ConvenioLiquidacion2__c.label}" />
+                   <apex:outputPanel id="convLiqui2">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.ConvenioLiquidacion2__c==null}"  fileName="{!strFileName}" value="{!BlobConvLiqui}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaConvenioLiquidacion2}" rendered="{!objDeuda.ConvenioLiquidacion2__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.ConvenioLiquidacion2__c}" rendered="{!objDeuda.ConvenioLiquidacion2__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarConvenioLiquidacion2}" rendered="{!objDeuda.ConvenioLiquidacion2__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+               
+               <apex:pageBlockSectionItem id="idPBSI06" rendered="{!objDeuda.ConvenioLiquidacion2__c!=null}">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.ConvenioLiquidacion3__c.label}" />
+                   <apex:outputPanel id="convLiqui2">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.ConvenioLiquidacion3__c==null}"  fileName="{!strFileName}" value="{!BlobConvLiqui}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaConvenioLiquidacion3}" rendered="{!objDeuda.ConvenioLiquidacion3__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.ConvenioLiquidacion3__c}" rendered="{!objDeuda.ConvenioLiquidacion3__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarConvenioLiquidacion3}" rendered="{!objDeuda.ConvenioLiquidacion3__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+               </apex:pageBlockSection>
+               
+               
+               <!-- Otros Documentos 1-->
+           <apex:pageBlockSection id="idPBS05" title="Otros Documentos" columns="2" rendered="true">               
+               <apex:pageBlockSectionItem id="idPBSI07">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.OtroDocumento1__c.label}" />
+                   <apex:outputPanel id="OtroDoc1">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.OtroDocumento1__c==null}"  fileName="{!strFileName}" value="{!BlobOtroDoc}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaOtroDocumento1}" rendered="{!objDeuda.OtroDocumento1__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.OtroDocumento1__c}" rendered="{!objDeuda.OtroDocumento1__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarOtroDocumento1}" rendered="{!objDeuda.OtroDocumento1__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+              
+              <!-- Otros Documentos 2-->
+               <apex:pageBlockSectionItem id="idPBSI08" rendered="{!objDeuda.OtroDocumento1__c!=null}">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.OtroDocumento2__c.label}" />
+                   <apex:outputPanel id="OtroDoc2">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.OtroDocumento2__c==null}"  fileName="{!strFileName}" value="{!BlobOtroDoc}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaOtroDocumento2}" rendered="{!objDeuda.OtroDocumento2__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.OtroDocumento2__c}" rendered="{!objDeuda.OtroDocumento2__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarOtroDocumento2}" rendered="{!objDeuda.OtroDocumento2__c!=null}"/>  
+              </apex:pageBlockSectionItem>
+               <!-- Otros Documentos 3-->
+               <apex:pageBlockSectionItem id="idPBSI09" rendered="{!objDeuda.OtroDocumento2__c!=null}">
+                   <apex:outputLabel value="{!$ObjectType.Deudas__c.fields.OtroDocumento3__c.label}" />
+                   <apex:outputPanel id="OtroDoc2">
+                       <apex:inputFile fileSize="{!fileSize}" title="File to upload to S3" rendered="{!objDeuda.OtroDocumento3__c==null}"  fileName="{!strFileName}" value="{!BlobOtroDoc}">
+                       </apex:inputFile>
+                       <apex:commandButton value="Subir" action="{!CargaOtroDocumento3}" rendered="{!objDeuda.OtroDocumento3__c==null}"/>
+                       <apex:outputLabel value="{!objDeuda.OtroDocumento3__c}" rendered="{!objDeuda.OtroDocumento3__c!=null}" />
+                   </apex:outputPanel> 
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                  <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarOtroDocumento3}" rendered="{!objDeuda.OtroDocumento3__c!=null}"/>  
+               </apex:pageBlockSectionItem>
+
+               </apex:pageBlockSection>
+                              
+               <!-- Cartas de Instrucción-->
+               <apex:pageBlockSection id="idPBS10" title="Carta de Instrucción" columns="2" rendered="true"> 
+                   <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion1__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 1</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion1__c}"/>
+                  </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion1}" rendered="{!objDeuda.CartaInstruccion1__c!=null}"/>  
+                  </apex:pageBlockSectionItem>
+               
+                  <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion2__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 2</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion2__c}"   />
+                  </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion2}" rendered="{!objDeuda.CartaInstruccion2__c!=null}"/>  
+                  </apex:pageBlockSectionItem>
+                   
+                  <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion3__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 3</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion3__c}"/>
+                  </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion3}" rendered="{!objDeuda.CartaInstruccion3__c!=null}"/>  
+                  </apex:pageBlockSectionItem>
+                  
+                  <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion4__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 4</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion4__c}" />
+                  </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion4}" rendered="{!objDeuda.CartaInstruccion4__c!=null}"/>  
+                  </apex:pageBlockSectionItem>
+                  
+                  <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion5__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 5</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion5__c}"/>
+                  </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion5}" rendered="{!objDeuda.CartaInstruccion5__c!=null}"/>  
+                  </apex:pageBlockSectionItem>
+                   
+                  <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion6__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 6</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion6__c}" />
+                  </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion6}" rendered="{!objDeuda.CartaInstruccion6__c!=null}"/>  
+                  </apex:pageBlockSectionItem>
+                  
+                  <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion7__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 7</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion7__c}"/>
+                  </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion7}" rendered="{!objDeuda.CartaInstruccion7__c!=null}"/>  
+                  </apex:pageBlockSectionItem>
+                  
+                  <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion8__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 8</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion8__c}"/>   
+                  </apex:pageBlockSectionItem> 
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion8}" rendered="{!objDeuda.CartaInstruccion8__c!=null}"/>  
+                  </apex:pageBlockSectionItem>
+                  
+                  <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion9__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 9</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion9__c}"/>  
+                  </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion9}" rendered="{!objDeuda.CartaInstruccion9__c!=null}"/>  
+                  </apex:pageBlockSectionItem>
+                  
+                  <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion10__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 10</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion10__c}"   />
+                  </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion10}" rendered="{!objDeuda.CartaInstruccion10__c!=null}"/>  
+                  </apex:pageBlockSectionItem>
+                  
+                  <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion11__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 11</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion11__c}"   />
+                  </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion11}" rendered="{!objDeuda.CartaInstruccion11__c!=null}"/>  
+                  </apex:pageBlockSectionItem>
+                   
+                  <apex:pageBlockSectionItem rendered="{!objDeuda.CartaInstruccion12__c!=null}">
+                      <apex:outputLabel styleClass="labelCol">Carta de Instrucción 12</apex:outputLabel>
+                      <apex:outputLabel value="{!objDeuda.CartaInstruccion12__c}" /> 
+                  </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                      <apex:commandButton value="Descargar" id="btDescargar" action="{!DescargarCartaInstruccion12}" rendered="{!objDeuda.CartaInstruccion12__c!=null}"/>  
+                  </apex:pageBlockSectionItem>        
+               </apex:pageBlockSection>
+               
+       </apex:pageBlock>
+        
+    </apex:form>
+</apex:page>

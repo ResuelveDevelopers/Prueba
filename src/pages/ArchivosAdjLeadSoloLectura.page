@@ -1,0 +1,13 @@
+<apex:page standardController="Lead" sidebar="false" showHeader="false">
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{!Lead.Attachments}" var="item">
+            <apex:column headerValue="Título">
+                <apex:outputLink value="/servlet/servlet.FileDownload?file={!item.id}"
+                    target="_blank">{!item.Name}</apex:outputLink>
+            </apex:column>
+            <apex:column value="{!item.Description}" />
+            <apex:column headerValue="Última Modificación por" value="{!item.lastModifiedBy.Name} {!item.lastModifiedDate}"/>
+            <apex:column headerValue="Creado Por" value="{!item.CreatedBy.Name} {!item.CreatedDate}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

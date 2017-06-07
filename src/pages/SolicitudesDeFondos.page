@@ -1,0 +1,126 @@
+<apex:page standardController="SolicitudesDeFondos__c"  extensions="SolicitudDeFondo_ctr">
+   <apex:sectionHeader title="Edición de Solicitud de Fondo" />
+   <apex:form >
+       <apex:pagemessages /> 
+       <apex:pageBlock title="Modificar Solicitud de Fondo">
+           <apex:pageBlockButtons >
+                <apex:commandButton value="Guardar" action="{!Save}"/>
+                <apex:commandButton value="Cancelar" action="{!Cancel}"/>
+            </apex:pageBlockButtons> 
+            <apex:pageBlockSection title="Informacion" collapsible="false">  
+                  <apex:inputField value="{!Solicitud_fondos.Name}"/>
+                  <apex:outputField value="{!SolicitudesDeFondos__c.Name}" rendered="false"/>    
+                <!--  <apex:outputText label="profile ">{!$User.ProfileId}</apex:outputText>-->
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Informacición de Solicitud" collapsible="false">
+                  <apex:outputField value="{!SolicitudesDeFondos__c.Estatus__c}" rendered="false"/>
+                  <apex:inputField value="{!Solicitud_fondos.Estatus__c}" rendered="{!VerNotasAlianz}"/>
+
+                  <apex:outputField value="{!SolicitudesDeFondos__c.Fecha__c}" rendered="false"/>
+                  <apex:inputField value="{!Solicitud_fondos.Fecha__c}"  rendered="{!NOT(VerPerfilSofipoE)}"/>
+                  <apex:outputText value="{!Solicitud_fondos.Fecha__c}"  rendered="{!VerPerfilSofipoE}"/>
+                  <apex:outputField value="{!SolicitudesDeFondos__c.FormaDePago__c}" rendered="false"/>
+                  <apex:inputField value="{!Solicitud_fondos.FormaDePago__c}"  rendered="{!VerPerfilSofipo}"/>
+                  <apex:outputText value="{!Solicitud_fondos.FormaDePago__c}"  rendered="{! NOT(VerPerfilSofipo)}"/>   
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Solicitud" collapsible="false">
+                  <apex:outputField value="{!SolicitudesDeFondos__c.TipoDeSolicitud1__c}" rendered="false"/>
+                  <apex:inputField value="{!Solicitud_fondos.TipoDeSolicitud1__c}"    rendered="{!VerPagosEstruct}" />
+                  <apex:outputText value="{!Solicitud_fondos.TipoDeSolicitud1__c}"  rendered="{!VerPerfilSofipoE}"/>
+                  
+                  <apex:outputField value="{!SolicitudesDeFondos__c.TipoDeSolicitud2__c}" rendered="false"/>
+                  <apex:inputField value="{!Solicitud_fondos.TipoDeSolicitud2__c}"  rendered="{!NOT(VerPerfilSofipoE)}"/>
+                  <apex:outputText value="{!Solicitud_fondos.TipoDeSolicitud2__c}"  rendered="{!VerPerfilSofipoE}"/>
+                  
+                  <apex:outputField value="{!SolicitudesDeFondos__c.MontoSolicitado1__c}" rendered="false"/>           
+                  <apex:inputField value="{!Solicitud_fondos.MontoSolicitado1__c}"  rendered="{!VerPagosEstruct}"/>
+                  <apex:outputText value="{!Solicitud_fondos.MontoSolicitado1__c}"  rendered="{!VerPerfilSofipoE}"/>
+                  
+                  <apex:outputField value="{!SolicitudesDeFondos__c.MontoSolicitado2__c}" rendered="false"/>
+                  <apex:inputField value="{!Solicitud_fondos.MontoSolicitado2__c}"   rendered="{!NOT(VerPerfilSofipoE)}" />
+                  <apex:outputText value="{!Solicitud_fondos.MontoSolicitado2__c}"  rendered="{!VerPerfilSofipoE}"/>
+                
+                  <apex:outputField value="{!SolicitudesDeFondos__c.ComisionMasIVA1__c}" rendered="false"/>
+                  <apex:inputField value="{!Solicitud_fondos.ComisionMasIVA1__c}"  rendered="{!VerPagosEstruct}"/>
+                  <apex:outputText value="{!Solicitud_fondos.ComisionMasIVA1__c}"  rendered="{!VerPerfilSofipoE}"/>
+                
+                  <apex:outputField value="{!SolicitudesDeFondos__c.ComisionMasIVA2__c}" rendered="false"/>
+                  <apex:inputField value="{!Solicitud_fondos.ComisionMasIVA2__c}"  rendered="{!NOT(VerPerfilSofipoE)}"/>
+                  <apex:outputText value="{!Solicitud_fondos.ComisionMasIVA2__c}"  rendered="{!VerPerfilSofipoE}"/>
+                   
+                  <apex:outputField value="{!SolicitudesDeFondos__c.TipoDeSolicitud3__c}" rendered="false"/> 
+                  <apex:inputField value="{!Solicitud_fondos.TipoDeSolicitud3__c}"  rendered="{!NOT(VerPerfilSofipoE)}"/>
+                  <apex:outputText value="{!Solicitud_fondos.TipoDeSolicitud3__c}"  rendered="{!VerPerfilSofipoE}"/>
+                  
+                  <br></br>
+            
+                  <apex:inputField value="{!Solicitud_fondos.MontoSolicitado2__c}"  rendered="{!NOT(VerPerfilSofipoE)}"/>
+                  <apex:outputText value="{!Solicitud_fondos.MontoSolicitado2__c}"  rendered="{!VerPerfilSofipoE}"/>           
+
+                  <br></br>
+                  <apex:outputField value="{!SolicitudesDeFondos__c.ComisionMasIVA3__c}" rendered="false"/>
+                  <apex:inputField value="{!Solicitud_fondos.ComisionMasIVA3__c}"  rendered="{!NOT(VerPerfilSofipoE)}"/>
+                  <apex:outputText value="{!Solicitud_fondos.ComisionMasIVA3__c}"  rendered="{!VerPerfilSofipoE}"/> 
+            
+                  <br></br>
+            
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection rendered="{!VerAlianz}" >
+            
+                 <apex:outputField value="{!SolicitudesDeFondos__c.CausaRechazo__c}" rendered="false"/>
+                 <apex:inputField value="{!Solicitud_fondos.CausaRechazo__c}" rendered="{!VerPerfilSofipo}"/>
+                 <apex:outputText value="{!Solicitud_fondos.CausaRechazo__c}" rendered="{!NOT(VerPerfilSofipo)}"/>
+                 
+                 <apex:outputField value="{!SolicitudesDeFondos__c.NotasAllianz__c}" rendered="false"/>
+                 <apex:inputField value="{!Solicitud_fondos.NotasAllianz__c}"  rendered="{!VerNotasAlianz}" />
+                 <apex:outputText value="{!Solicitud_fondos.NotasAllianz__c}"  rendered="{!NOT(VerNotasAlianz)}"/>
+                 <br></br>
+                 <apex:outputField value="{!SolicitudesDeFondos__c.Notasnegociador__c}" rendered="false"/>
+                 <apex:inputField value="{!Solicitud_fondos.Notasnegociador__c}"  rendered="{!VerNotasAlianz}" />
+                 <apex:outputText value="{!Solicitud_fondos.Notasnegociador__c}"  rendered="{!NOT(VerNotasAlianz)}"/>
+   
+          </apex:pageBlockSection>
+          
+          <apex:pageBlockSection rendered="{!VerSofipo}" >
+                <apex:outputField value="{!SolicitudesDeFondos__c.CausaRechazoRTFin__c}" rendered="false"/>
+                <apex:inputField value="{!Solicitud_fondos.CausaRechazoRTFin__c}" rendered="{!VerPerfilSofipo}"/>
+                <apex:outputText value="{!Solicitud_fondos.CausaRechazoRTFin__c}" rendered="{!NOT(VerPerfilSofipo)}"/>
+                
+                <apex:outputField value="{!SolicitudesDeFondos__c.NotasRTFin__c}" rendered="false"/>
+                <apex:inputField value="{!Solicitud_fondos.NotasRTFin__c}" rendered="{!VerPerfilSofipo}"/>
+                <apex:outputText value="{!Solicitud_fondos.NotasRTFin__c}" rendered="{!NOT(VerPerfilSofipo)}"/>
+                
+          </apex:pageBlockSection> 
+          
+          <apex:pageBlockSection title="Información de la Deuda" collapsible="false">
+                <apex:outputField value="{!SolicitudesDeFondos__c.Deuda__c}" rendered="false"/>
+                <apex:inputField value="{!Solicitud_fondos.Deuda__c}"  rendered="{!NOT(VerPerfilSofipoE)}"/>  
+                <apex:outputText value="{!Solicitud_fondos.Deuda__r.name}"  rendered="{!VerPerfilSofipoE}"/> 
+                
+                <apex:outputField value="{!SolicitudesDeFondos__c.NumeroCredito__c}" rendered="false"/>
+                <apex:inputField value="{!Solicitud_fondos.NumeroCredito__c}"  rendered="{!NOT(VerPerfilSofipoE)}"/>
+                <apex:outputText value="{!Solicitud_fondos.NumeroCredito__c}"  rendered="{!VerPerfilSofipoE}"/> 
+               
+                <apex:outputField value="{!SolicitudesDeFondos__c.BancoNombreTarjeta__c}" rendered="false"/>
+                <apex:inputField value="{!Solicitud_fondos.BancoNombreTarjeta__c}"  rendered="{!NOT(VerPerfilSofipoE)}"/>
+                <apex:outputText value="{!Solicitud_fondos.BancoNombreTarjeta__c}"  rendered="{!VerPerfilSofipoE}"/> 
+                
+                <apex:outputField value="{!SolicitudesDeFondos__c.DeudaMontoLiquidarBanco__c}" rendered="false"/>
+                <apex:inputField value="{!Solicitud_fondos.DeudaMontoLiquidarBanco__c}"  rendered="{!NOT(VerPerfilSofipoE)}"/>
+                <apex:outputText value="{!Solicitud_fondos.DeudaMontoLiquidarBanco__c}"  rendered="{!VerPerfilSofipoE}"/> 
+                
+                <br></br>
+                <apex:outputField value="{!SolicitudesDeFondos__c.ComisionIVADeuda__c}" rendered="false"/>
+                <apex:inputField value="{!Solicitud_fondos.ComisionIVADeuda__c}"  rendered="{!NOT(VerPerfilSofipoE)}"/>
+                <apex:outputText value="{!Solicitud_fondos.ComisionIVADeuda__c}"  rendered="{!VerPerfilSofipoE}"/> 
+
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Información del Sistema" collapsible="false">
+                <apex:outputField value="{!SolicitudesDeFondos__c.Owner.Name}" rendered="false"/>
+                <apex:inputField value="{!Solicitud_fondos.Owner.Name}" label="Propietario"/>
+            </apex:pageBlockSection>
+          
+        </apex:pageBlock>
+   </apex:form>
+</apex:page>

@@ -1,0 +1,48 @@
+<apex:page showHeader="false" sidebar="false" controller="VisorDocsAmazon_ctr" action="{!getArchivo}">
+    
+    <apex:pagemessages /> 
+    <script>
+        var popUp;
+        var delay=350;
+        setTimeout(function() 
+        {
+            var mostrarError = document.getElementById('{!$Component.form1.blError}').value;
+            if(mostrarError == 'true' && document.getElementById('{!$Component.form1.strArchivoDescargado}').value != 'true')
+            {
+                //alert('strArchivoDescargado-->' + document.getElementById('{!$Component.form1.strArchivoDescargado}').value)
+                var idArchivo = document.getElementById('{!$Component.form1.strIdAdjunto}').value;
+                var nombreInstancia = document.getElementById('{!$Component.form1.strNombreInstancia}').value;
+                popUp = window.open('https://' +  nombreInstancia + '/servlet/servlet.FileDownload?file=' + idArchivo);
+                if (popUp == null || typeof(popUp)=='undefined') 
+                {   
+                    alert('Por favor coloque la opción de permitir pop ups o ventanas emergentes de esta página y vuelva a abrir el archivo'); 
+                }
+            }
+        }, delay);
+
+        var delay2=2500; 
+        setTimeout(function() {
+            var mostrarError2 = document.getElementById('{!$Component.form1.blError}').value;
+            if(mostrarError2 == 'true' && document.getElementById('{!$Component.form1.strArchivoDescargado}').value != 'true')
+            {
+                if (popUp != null || typeof(popUp)!='undefined') 
+                {
+                     CallApexMethod();
+                }
+            }
+        }, delay2);
+    </script>
+
+    <apex:form id="form1">
+        <apex:actionFunction name="CallApexMethod" action="{!borrarAdjunto}" />
+        <apex:inputHidden value="{!strIdAdjunto}" id="strIdAdjunto"/>
+        <apex:inputHidden value="{!blError}" id="blError"/>
+        <apex:inputHidden value="{!strNombreInstancia}" id="strNombreInstancia"/>
+        <apex:inputHidden value="{!strArchivoDescargado}" id="strArchivoDescargado"/>
+    </apex:form> 
+    <!-- <apex:form >
+        <apex:actionFunction name="CallApexMethod" action="{!borrarAdjunto}" />
+    </apex:form> 
+    <apex:outputLink value="{!URLFOR($Action.Attachment.Download, attFile.id)}" target="_blank" onclick = "Download()">Descargar archivo</apex:outputLink> 
+    <apex:outputLink value="" onclick = "Download()">Descargar archivo</apex:outputLink> -->
+</apex:page>
